@@ -1,0 +1,26 @@
+version: 1
+pruners:
+  l0_rnn_pruner:
+    class: AutomatedGradualPruner
+    initial_sparsity : 0.05
+    final_sparsity: 0.70
+    weights: [rnn.weight_ih_l0, rnn.weight_hh_l0]
+
+  l1_linear_pruner:
+    class: AutomatedGradualPruner
+    initial_sparsity : 0.05
+    final_sparsity: 0.70
+    weights: [linear.weight]
+
+policies:
+  - pruner:
+      instance_name : l0_rnn_pruner
+    starting_epoch: 10000
+    ending_epoch: 20000
+    frequency: 1
+
+  - pruner:
+      instance_name : l1_linear_pruner
+    starting_epoch: 10000
+    ending_epoch: 20000
+    frequency: 1

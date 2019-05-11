@@ -1,0 +1,5 @@
+INFO:root:Device being used: cpu
+INFO:root:Longest seq: 9366
+INFO:root:Shortest seq: 128
+INFO:root:Average seq: 699.22
+INFO:root:Train Epoch 10: Loss - 32151536.0, Avg Loss - 29234179.09090909

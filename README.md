@@ -1,1 +1,2 @@
-# learned-inverted-indexes
+# learned-inverted-index
+Learned inverted index

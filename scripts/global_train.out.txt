@@ -1,0 +1,2 @@
+results_GRU_h100_l2_e10000.log
+slurmstepd: error: *** JOB 998989 ON gpu-38 CANCELLED AT 2019-05-02T22:05:39 ***

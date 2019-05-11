@@ -1,0 +1,4 @@
+parameter,shape,volume,sparse volume,sparsity level
+rnn.weight_ih_l0,"(48, 1)",48,48,0.0
+rnn.weight_hh_l0,"(48, 12)",576,576,0.0
+linear.weight,"(1, 12)",12,12,0.0

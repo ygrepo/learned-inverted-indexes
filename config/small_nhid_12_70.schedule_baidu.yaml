@@ -1,0 +1,29 @@
+version: 1
+pruners:
+  ih_l0_rnn_pruner:
+    class: BaiduRNNPruner
+    q: 0.17
+    ramp_epoch_offset: 3
+    ramp_slope_mult: 2
+    weights: [rnn.weight_ih_l0]
+
+  hh_l0_rnn_pruner:
+    class: BaiduRNNPruner
+    q: 0.11
+    ramp_epoch_offset: 3
+    ramp_slope_mult: 2
+    weights: [rnn.weight_hh_l0]
+
+policies:
+  - pruner:
+      instance_name : ih_l0_rnn_pruner
+    starting_epoch: 4
+    ending_epoch: 21
+    frequency: 1
+
+  - pruner:
+      instance_name : hh_l0_rnn_pruner
+    starting_epoch: 4
+    ending_epoch: 21
+    frequency: 1
+

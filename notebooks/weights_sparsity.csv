@@ -1,0 +1,10 @@
+parameter,shape,volume,sparse volume,sparsity level
+rnn.cells.0.fc_gate_x.w_scale,"(48, 1)",48,48,0.0
+rnn.cells.0.fc_gate_x.w_zero_point,"(48, 1)",48,48,0.0
+rnn.cells.0.fc_gate_x.wrapped_module.weight,"(48, 1)",48,48,0.0
+rnn.cells.0.fc_gate_h.w_scale,"(48, 1)",48,48,0.0
+rnn.cells.0.fc_gate_h.w_zero_point,"(48, 1)",48,47,2.083333333333337
+rnn.cells.0.fc_gate_h.wrapped_module.weight,"(48, 12)",576,574,0.347222222222221
+linear.w_scale,"(1, 1)",1,1,0.0
+linear.w_zero_point,"(1, 1)",1,1,0.0
+linear.wrapped_module.weight,"(1, 12)",12,12,0.0

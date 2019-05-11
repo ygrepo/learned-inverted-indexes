@@ -1,0 +1,42 @@
+version: 1
+pruners:
+  l0_rnn_pruner:
+    class: AutomatedGradualPruner
+    initial_sparsity : 0.05
+    final_sparsity: 0.70
+    weights: [rnn.weight_ih_l0, rnn.weight_hh_l0]
+
+  l1_linear_pruner:
+    class: AutomatedGradualPruner
+    initial_sparsity : 0.05
+    final_sparsity: 0.70
+    weights: [linear.weight]
+
+policies:
+  - pruner:
+      instance_name : l0_rnn_pruner
+#      args:
+#          mini_batch_pruning_frequency: 1
+    starting_epoch: 1
+    ending_epoch: 10
+    frequency: 1
+
+  - pruner:
+      instance_name : l1_linear_pruner
+#      args:
+#          mini_batch_pruning_frequency: 1
+    starting_epoch: 0
+    ending_epoch: 10
+    frequency: 1
+
+# - pruner:
+#      instance_name: random_filter_pruner
+#      args:
+#        mini_batch_pruning_frequency: 16
+#        discard_masks_at_minibatch_end: True
+#        mask_on_forward_only: True
+#        use_double_copies: True
+#        mask_gradients: True
+#    starting_epoch: 0
+#    ending_epoch: 300
+#    frequency: 1
