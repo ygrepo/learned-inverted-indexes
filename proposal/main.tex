@@ -1,0 +1,75 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[shortlabels]{enumitem}
+\usepackage[hyphens]{url}
+\usepackage[nameinlink,noabbrev]{cleveref}
+\usepackage{xcolor}
+
+\title{Space and Time Efficient Deep Learned Inverted Index Representation}
+\author{Antonio Mallia, Yair Schiff, Yves Greatti}
+\date{}
+
+\begin{document}
+\maketitle
+% \textbf{Due on the 22nd of April}
+
+\noindent\rule{\textwidth}{0.4pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3. Project proposal
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Abstract}
+An inverted index is the basic data structure used in most current large-scale information retrieval systems.
+It can be modeled as a collection of sorted sequences of integers.
+
+Many compression techniques for inverted indexes have been studied in the past, with some of them reaching significant compression ratio, while preserving their query time efficiency.
+
+In this project we aim to use Deep Learning (DL) models to replace the index structure, resulting in better compression of the inverted index.
+We also intend to evaluate the potential gain that can be achieved in terms of decoding speed.
+We believe that this learned inverted index structure require less memory and can be computationally much faster than its traditional counterpart.
+
+\section{Related work}
+An inverted index is the key data structure used in most current large-scale text search systems.
+It is composed of posting lists, one for each distinct term in a collection.
+A posting list is a sequence of the IDs of the documents containing the corresponding term, usually along with respective in-document frequencies or other information needed for ranking.
+Given the extremely large collections indexed by current search engines, even a single node of a large search cluster typically contains many billions of integers.
+Thus, both space efficiency and index access speed are crucial to maintain acceptable query response times.
+This motivates the use of specialized index compression techniques that reduce space while also supporting extremely fast decompression.
+
+Kraska et al. \cite{Kraska2018} recently proposed a novel and somewhat surprising approach which suggests that index structures can be interpreted as Machine Learning (ML) models and an auxiliary structure to provide the same semantic guarantees. 
+The potential power of this approach comes from the fact that continuous functions, describing the data distribution, can be used to build more efficient data structures. For example, a B-Tree-Index can be seen as a model to map a key to the position of a record within a sorted array.
+The benefit of learned index structures is that they require less memory and can be evaluated substantially faster than their traditional counterparts.
+
+\section{Our contribution}
+We aim to expand and improve previous results obtained by Kraska et al. \cite{Kraska2018} to solve the inverted index compression problem.
+
+The goal in this project is to replace the memory intensive inverted index with a model that can use some form of `priming' token to re-produce the posting list for a given search term.
+That is, rather than maintaining $n$ posting lists, where $n$ corresponds to the number of unique terms in the corpus, the goal is to store the weights of a model that can reproduce these lists and has a lighter memory footprint than the lists themselves.
+To this end, we will employ recurrent neural nets (RNNs), which have been shown to have the necessary capacity to learn short-term and long-term dependencies in natural signals.
+To overcome the well-documented vanishing and exploding gradient issues noted in RNNs, we will specifically test LSTM and GRU models.
+
+Inverted lists usually exhibit local clustering. It becomes possible to learn to predict a subsequent integer once few of the preceding ones are known. 
+Furthermore, several posting lists share a similar distribution or, even, share subsequences of integers.
+These features of posting list bode well for the approach suggested and indicate that the compression of an inverted index data structure into the weights of an RNN is possible.
+
+
+Our project will attempt several different approaches, which will range on a spectrum of model complexity.
+On one end, we will attempt to build $n$ RNNs, i.e one for each unique search term. 
+The goal here is to build models that are lightweight enough that saving their weights will still yield in memory gains over saving the posting lists themselves.
+On the other end of the spectrum, is the more ambitious goal of building one model that can learn to accurately represent all $n$ posting lists.
+Various combinations in between these two extremes will also be tested in an attempt to balance model complexity, memory footprint, and accuracy.
+
+Another approach is to learn the distribution of IDs among the posting lists, using variational inference. Once the distribution is known the lookup from term to ID is immediate. For this research, if time permits, we may  investigate sparse auto-encoding techniques.
+
+Finally, once we have successfully built models that can successfully replace the storage of posting lists, we will further try to compress these models.
+Specifically, we intend to explore how model distillation can affect the memory requirements and the accuracy of the learned models  to see what further compression gains can be had over an and above simply swapping posting lists for model weights.
+
+\section{Conclusion}
+We see an unexploited potential in applying DL models to inverted index compression tasks.
+Previous results have shown already the enormous advantage of learning data structures, but there is no evidence in the literature that this methodology can be applied to inverted indexes. 
+We expect that combining learned index structures with inverted indices will be a fruitful research direction in the near future.
+
+\bibliography{bibliography} 
+\bibliographystyle{plain}
+\end{document}
