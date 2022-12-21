@@ -6,4 +6,4 @@ while preserving query time efficiency. In this project, we aim to use Deep Lear
 models to replace the index structure, resulting in better compression of the inverted
 index. We present results that indicate that with further refinement this learned
 inverted index structure can reduce memory requirements and provide a novel
-approach to learned compression
+approach to learned compression.
