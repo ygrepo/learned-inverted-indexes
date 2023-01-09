@@ -131,3 +131,4 @@ deltas/*
 
 # Apple files
 .DS_Store
+docs/*
